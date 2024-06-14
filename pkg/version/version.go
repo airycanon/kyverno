@@ -6,7 +6,7 @@ import (
 	"github.com/go-logr/logr"
 )
 
-// BuildVersion is provided by govvv at compile-time
+// BuildVersion is provided by goreleaser througth the .goreleaser.yaml at compile-time
 var BuildVersion string
 
 func Version() string {
@@ -20,6 +20,9 @@ func Version() string {
 	return BuildVersion
 }
 
+// BuildTime is provided by goreleaser througth the .goreleaser.yaml at compile-time
+var BuildTime string
+
 func Time() string {
 	bi, ok := debug.ReadBuildInfo()
 	if ok {
@@ -29,8 +32,11 @@ func Time() string {
 			}
 		}
 	}
-	return "---"
+	return BuildTime
 }
+
+// BuildHash is provided by goreleaser througth the .goreleaser.yaml at compile-time
+var BuildHash string
 
 func Hash() string {
 	bi, ok := debug.ReadBuildInfo()
@@ -41,7 +47,7 @@ func Hash() string {
 			}
 		}
 	}
-	return "---"
+	return BuildHash
 }
 
 // PrintVersionInfo displays the kyverno version - git version
