@@ -15,6 +15,15 @@ func EvaluateList(jmesPath string, ctx enginecontext.EvalInterface) ([]interface
 		return nil, err
 	}
 
+	m, ok := i.([]map[string]interface{})
+	if ok {
+		l := make([]interface{}, len(m))
+		for _, e := range m {
+			l = append(l, e)
+		}
+		return l, nil
+	}
+
 	l, ok := i.([]interface{})
 	if !ok {
 		return []interface{}{i}, nil
